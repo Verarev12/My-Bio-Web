@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>GÜLVERA_DEEP_SYSTEM_V5</title>
+    <style>
+        :root {
+            --neon: #00ff41;
+            --dark: #050505;
+            --glass: rgba(11, 59, 56, 0.6);
+            --glow: 0 0 15px rgba(0, 255, 65, 0.3);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0; padding: 0;
+            background: var(--dark);
+            color: var(--neon);
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: hidden; /* Yatay kaydırmayı kapattık */
+            line-height: 1.6;
+        }
+
+        /* Matrix Arka Plan */
+        #matrix-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.15;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Terminal Pencere Stili */
+        .window {
+            background: var(--glass);
+            border: 2px solid var(--neon);
+            box-shadow: var(--glow);
+            backdrop-filter: blur(8px);
+            margin-bottom: 50px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .window-header {
+            background: var(--neon); color: black;
+            padding: 8px 15px; font-weight: bold;
+            display: flex; justify-content: space-between;
+        }
+
+        .window-content { padding: 30px; }
+
+        /* Profil ve Kimlik */
+        .profile-section { display: flex; gap: 30px; align-items: flex-start; flex-wrap: wrap; }
+        .pp-frame {
+            width: 180px; height: 180px;
+            border: 2px solid var(--neon);
+            position: relative; overflow: hidden;
+            background: repeating-linear-gradient(45deg, #000, #001a00 10px);
+        }
+        .pp-frame::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon); box-shadow: 0 0 10px var(--neon);
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* Veri Satırları */
+        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .data-item { border-left: 3px solid var(--neon); padding-left: 10px; background: rgba(0,255,65,0.05); }
+
+        /* Sertifika ve Notlar */
+        .cert-card {
+            border: 1px dashed var(--neon);
+            padding: 15px; margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .cert-card:hover { background: rgba(0, 255, 65, 0.1); transform: scale(1.02); }
+        .grade-tag { color: #fff; font-weight: bold; padding: 0 5px; background: #008f11; }
+
+        /* İstatistik Barı */
+        .bar-outer { border: 1px solid var(--neon); height: 12px; margin: 10px 0; width: 100%; }
+        .bar-inner { background: var(--neon); height: 100%; box-shadow: 0 0 8px var(--neon); }
+
+        h1, h2, h3 { text-transform: uppercase; margin-top: 0; }
+        .blink { animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; }
+     }
+
+        footer { text-align: center; padding: 50px; font-size: 0.8rem; opacity: 0.6; }
+            .terminal-link {
+                color: var(--neon);
+                text-decoration: none;
+                border-bottom: 1px dashed var(--neon);
+                transition: 0.3s;
+            }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix-bg"></canvas>
+
+    <div class="container">
+
+        <div class="window">
+            <div class="window-header"><span>[CORE_IDENTITY]</span><span>X_LOG_001</span></div>
+            <div class="window-content">
+                <div class="profile-section">
+                    <div class="pp-frame">
+                        <div style="height:100%; display:flex; align-items:center; justify-content:center; text-align:center; font-size:0.7rem;">
+                            IMAGE_SECURED<br>GÜLVERA.DAT
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <h1>GÜLVERA DAĞLILAR <span class="blink">_</span></h1>
+
+                        <p>> ARKA-YÜZ YAZILIM GELİŞTİRME </p>
+                        <p>> HATAY MUSTAFA KEMAL ÜNİVERSİTESİ </p>
+                    </div>
+                </div>
+                
+                <div class="data-grid">
+                    <div class="data-item">DOĞUM: 29/07/2006 </div>
+                    <div class="data-item">STATÜ: AKTİF ÖĞRENCİ </div>
+                    <div class="data-item">DÖNEM: 1. SINIF / 2. DÖNEM </div>
+                    <div class="data-item">LİSANSLI SPORCU: Taekwondo </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="window">
+            <div class="window-header"><span>[CERTIFICATION_DB]</span><span>VERIFIED_ASSETS</span></div>
+            <div class="window-content">
+                <h2>Orijinal Sertifika Kayıtları</h2>
+                
+                <div class="cert-card">
+                    <strong>> C# PROGRAMLAMA </strong>
+                    <p>BTK Akademi | Sertifika No: D2xhEKK4X8 </p>
+                    <p>Tarih: 13.02.2026  | Başarı: <span class="grade-tag">BB</span> (Programlama I) </p>
+                </div>
+
+                <div class="cert-card">
+                    <strong>> DOCKER TEMELLERİ </strong>
+                    <p>BTK Akademi | Sertifika No: MAZUEAmv01 </p>
+                    <p>Tarih: 03.04.2026  | Başarı: <span class="grade-tag">BB</span> (Docker I) </p>
+                </div>
+
+                <div class="cert-card">
+                    <strong>> PROJE YÖNETİM TEMELLERİ</strong>
+                    <p>BTK Akademi | Sertifika No: VP1cJqprX4 </p>
+                    <p>Tarih: 20.04.2026 | Bilimsel Proje Hazırlama: <span class="grade-tag">BB</span> </p>
+                </div>
+
+                <div class="cert-card">
+                    <strong>> A1 SEVİYE İNGİLİZCE </strong>
+                    <p>BTK Akademi | Sertifika No: 7rptZ1eB9X </p>
+                    <p>Tarih: 23.12.2025 | Yabancı Dil I: <span class="grade-tag">AA</span> </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="window">
+            <div class="window-header"><span>[NEURAL_STATISTICS]</span><span>AI_FEEDBACK</span></div>
+            <div class="window-content">
+                <h2>Yetenek Algoritmaları</h2>
+                
+                <p>BACKEND MİMARİSİ (C# / Django / Bulut)</p>
+                <div class="bar-outer"><div class="bar-inner" style="width: 88%;"></div></div>
+
+                <p>DİSİPLİN & ODAKLANMA (Taekwondo Siyah Kuşak)</p>
+                <div class="bar-outer"><div class="bar-inner" style="width: 95%;"></div></div>
+
+                <p>YARATICI ANALİZ (Sanat & Müzik)</p>
+                <div class="bar-outer"><div class="bar-inner" style="width: 85%;"></div></div>
+
+                <br>
+                <h3>// AKTİF_MODÜL: UNITY</h3>
+                <p>Unity Engine üzerinde fizik tabanlı `arabaKontrol.cs` mimarisi geliştiriliyor.<br>
+                    Unity Engine üzerinde kendi oyun geliştiricisi. C# Programlama temelleri bu projede aktif olarak simüle ediliyor.</p>
+                
+                <div style="margin-top: 20px; padding: 15px; border: 1px solid var(--neon); font-size: 0.9rem;">
+                    <strong>AI_ANALYSIS:</strong> Gülvera, BTK Akademi'den aldığın sertifikalar ile akademik transkriptindeki başarıların (Örn: İngilizce AA ) mükemmel bir uyum içinde. Backend tarafındaki "Docker" ve "Bulut Bilişim" (BB ) merakın, seni geleceğin kıdemli mimarlarından biri yapabilir.
+                </div>
+            </div>
+        </div>
+
+        <div class="window">
+            <div class="window-header"><span>[CONNECTION_PORT]</span><span>OUT_LOG</span></div>
+            <div class="window-content">
+                <h2>Bağlantı Kanalları</h2>
+                <ul style="list-style-type: none; padding: 0;">
+    <li>
+        <a href="mailto:daglilargulvera@gmail.com" class="terminal-link">📧 MAIL: daglilargulvera@gmail.com</a>
+    </li> 
+    
+    <li class="terminal-item">📍 LOKASYON: Hatay Mustafa Kemal Üniv. Kırıkhan MYO </li>
+
+    <li>
+        <a href="https://github.com/Verarev12" target="_blank" class="terminal-link">💻 Kodlar: GitHub/Verarev12</a>
+    </li>
+
+    <li>
+        <a href="https://www.linkedin.com/in/g%C3%BClvera-da%C4%9Fl%C4%B1lar-48435a394/" target="_blank" class="terminal-link">🤝 Bağlantı: LinkedIn/Gülvera Dağlılar</a>
+    </li>
+</ul>
+                <br>
+                <p style="text-align: center;" class="blink">OTURUMU KAPATMAK İÇİN SAYFAYI KAYDIRMAYA DEVAM EDİN...</p>
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2026 Gülvera Dağlılar. "Code is Law, Logic is Queen." [GÜLVERA_DEEP_SYSTEM_V5]
+        </footer>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const characters = "GULVERA25743201501BTK#$";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        for (let x = 0; x < columns; x++) drops[x] = 1;
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#00ff41";
+            ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
